@@ -54,7 +54,7 @@ const EndRideScreen = () => {
           <Text style={styles.subtitle}>Desça no ponto mais próximo</Text>
         </View>
         <View style={styles.bikeDetails}>
-          <Image source={require('./user.jpg')} style={styles.bikeImage} />
+          <Image source={require('./bicicleta.png')} style={styles.bikeImage} />
           <View>
             <Text style={styles.address}>
               <FontAwesome name="map-marker" size={18} color="#007AFF" /> 6391

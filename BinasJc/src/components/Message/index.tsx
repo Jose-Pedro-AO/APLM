@@ -32,7 +32,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ navigation }) => {
       <ScrollView style={styles.chatArea}>
         {/* Example messages */}
         <View style={styles.messageContainer}>
-          <Image source={require('./ana.png')} style={styles.avatar} />
+          <Image source={require('./user.jpg')} style={styles.avatar} />
           <View style={styles.receivedMessage}>
             <Text>Lorem ipsum dolor sit amet ipsun</Text>
             <Text style={styles.timestamp}>10:30</Text>
@@ -44,11 +44,11 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ navigation }) => {
             <Text>Lorem ipsum dolor sit amet ipsun</Text>
             <Text style={styles.timestamp}>10:32</Text>
           </View>
-          <Image source={require('./joao.png')} style={styles.avatar} />
+          <Image source={require('./user.jpg')} style={styles.avatar} />
         </View>
 
         <View style={styles.messageContainer}>
-          <Image source={require('./ana.png')} style={styles.avatar} />
+          <Image source={require('./user.jpg')} style={styles.avatar} />
           <View style={styles.receivedMessage}>
             <Text>Lorem ipsum dolor sit amet ipsun</Text>
             <Text style={styles.timestamp}>10:35</Text>
@@ -60,7 +60,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ navigation }) => {
             <Text>Lorem ipsum dolor sit amet ipsun</Text>
             <Text style={styles.timestamp}>10:38</Text>
           </View>
-          <Image source={require('./joao.png')} style={styles.avatar} />
+          <Image source={require('./user.jpg')} style={styles.avatar} />
         </View>
       </ScrollView>
 

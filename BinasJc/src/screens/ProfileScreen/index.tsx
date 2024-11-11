@@ -40,7 +40,7 @@ export default function ProfileScreen() {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Cabeçalho do perfil */}
       <View style={styles.profileHeader}>
-        <Image source={require('./ProfJoao.png')} style={styles.profileImage} />
+        <Image source={require('./user.jpg')} style={styles.profileImage} />
         <View style={styles.profileInfo}>
           <Text style={styles.profileName}>João Costa</Text>
           <Text style={styles.profileEmail}>joao.costa@mail.com</Text>

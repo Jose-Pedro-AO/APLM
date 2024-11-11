@@ -18,7 +18,6 @@ import EndRideScreen from './src/components/EndRideScreen';
 import EndRideDetailsScreen from './src/components/EndRideDetailsScreen';
 import EditProfileScreen from './src/components/EditProfileScreen';
 import RideHistoryScreen from './src/components/RideHistoryScreen';
-import TermsAndConditionsScreen from './src/components/TermsAndConditionsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +31,6 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="Termos" component={TermsAndConditionsScreen} />
           <Stack.Screen name="Historico" component={RideHistoryScreen} />
           <Stack.Screen name="EditarP" component={EditProfileScreen} />
           <Stack.Screen name="FimDeCorrida" component={EndRideDetailsScreen} />
