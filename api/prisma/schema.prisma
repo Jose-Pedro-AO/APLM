@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id        Int              @id @default(autoincrement())
+  username       String           @unique
+  password  String
+  total_points   Int              @default(0)
+  created_at     DateTime         @default(now())
+  bikes          Bike[]           @relation("UserBikes")
+  routes         Route[]
+  pointsSent     PointTransfer[]  @relation("PointsSent")
+  pointsReceived PointTransfer[]  @relation("PointsReceived")
+  messagesSent   Message[]        @relation("MessagesSent")
+  messagesReceived Message[]      @relation("MessagesReceived")
+  bikeUsageLogs  BikeUsageLog[]
+}
+
+model Bike {
+  bike_id    Int          @id @default(autoincrement())
+  station_id Int?
+  is_reserved Boolean      @default(false)
+  status     BikeStatus
+  beacon_id  String?
+  station    Station?      @relation(fields: [station_id], references: [station_id])
+  usageLogs  BikeUsageLog[]
+  user_id    Int?
+  user       User?         @relation("UserBikes", fields: [user_id], references: [user_id])
+}
+
+model Station {
+  station_id Int       @id @default(autoincrement())
+  name       String
+  location   Json
+  bikes      Bike[]
+  usageLogs  BikeUsageLog[]
+}
+
+model Route {
+  route_id   Int       @id @default(autoincrement())
+  user_id    Int
+  start_time DateTime
+  end_time   DateTime?
+  distance   Float
+  route_data Json
+
+  user       User      @relation(fields: [user_id], references: [user_id])
+}
+
+model PointTransfer {
+  transfer_id Int      @id @default(autoincrement())
+  sender_id   Int
+  receiver_id Int
+  points      Int
+  timestamp   DateTime @default(now())
+
+  sender      User     @relation("PointsSent", fields: [sender_id], references: [user_id])
+  receiver    User     @relation("PointsReceived", fields: [receiver_id], references: [user_id])
+}
+
+model Message {
+  message_id    Int      @id @default(autoincrement())
+  sender_id     Int
+  receiver_id   Int
+  message_content String
+  timestamp     DateTime @default(now())
+
+  sender        User     @relation("MessagesSent", fields: [sender_id], references: [user_id])
+  receiver      User     @relation("MessagesReceived", fields: [receiver_id], references: [user_id])
+}
+
+model BikeUsageLog {
+  log_id      Int        @id @default(autoincrement())
+  user_id     Int
+  bike_id     Int
+  action      UsageAction
+  station_id  Int
+  timestamp   DateTime    @default(now())
+
+  user        User       @relation(fields: [user_id], references: [user_id])
+  bike        Bike       @relation(fields: [bike_id], references: [bike_id])
+  station     Station    @relation(fields: [station_id], references: [station_id])
+}
+
+enum BikeStatus {
+  disponivel
+  em_uso
+  manutencao
+}
+
+enum UsageAction {
+  retirada
+  entrega
+}
