@@ -4,9 +4,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import styles from './styles'; // Importando o arquivo de estilos separado
 
 const EditProfileScreen = () => {
-  const [name, setName] = useState('João Silva');
-  const [phone, setPhone] = useState('1234567890');
-  const [email, setEmail] = useState('joaosilva@example.com');
+  const [name, setName] = useState('Jonh Doe');
+  const [phone, setPhone] = useState('911');
+  const [email, setEmail] = useState('jonh.doe@gmail.com');
 
   const handleUpdate = () => {
     console.log('Perfil atualizado:', { name, phone, email });
@@ -25,7 +25,7 @@ const EditProfileScreen = () => {
 
       {/* Imagem de perfil */}
       <View style={styles.profileImageContainer}>
-        <Image source={require('./joao.png')} style={styles.profileImage} />
+        <Image source={require('./user.jpg')} style={styles.profileImage} />
         <TouchableOpacity style={styles.cameraIcon}>
           <FontAwesome name="camera" size={20} color="#FFF" />
         </TouchableOpacity>

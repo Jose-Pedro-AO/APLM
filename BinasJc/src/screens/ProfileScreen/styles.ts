@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#F0F4F8',
+    backgroundColor: '#FFFFFF',
   },
   profileHeader: {
     flexDirection: 'row',
@@ -58,14 +58,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingVertical: 20,
     paddingHorizontal: 10,
-    marginHorizontal: 30,
-    //backgroundColor: '#FFFFFF',
-    marginVertical: 15,
-    borderRadius: 100,
+    backgroundColor: '#F0F4F8',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
     elevation: 5,
   },
   statBox: {
@@ -91,11 +85,8 @@ const styles = StyleSheet.create({
   menuContainer: {
     paddingVertical: 10,
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
+    borderStartStartRadius: 12,
+    borderStartEndRadius: 12,
     elevation: 5,
     marginBottom: 20,
   },

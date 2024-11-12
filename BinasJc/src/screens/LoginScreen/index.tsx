@@ -15,7 +15,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <>
-        <Text style={styles.title}>Bem-vindo(a)</Text>
+        <Text style={styles.title}>Bem-vindo</Text>
         <Text style={styles.subtitle}>Faça login para continuar</Text>
       </>
       <TextInput

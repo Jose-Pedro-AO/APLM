@@ -21,7 +21,7 @@ const chats: Chat[] = [
   {
     id: '1',
     name: 'Jane Doe',
-    message: 'Lorem ipsun dorem',
+    message: 'Bom dia!',
     time: '12:45',
     avatar: require('./user.jpg'),
     isOnline: true,

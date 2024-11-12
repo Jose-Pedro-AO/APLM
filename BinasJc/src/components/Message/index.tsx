@@ -22,7 +22,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Ana Gourgel</Text>
+        <Text style={styles.title}>Jonh Doe</Text>
         <TouchableOpacity>
           <Text style={styles.options}>⋮</Text>
         </TouchableOpacity>

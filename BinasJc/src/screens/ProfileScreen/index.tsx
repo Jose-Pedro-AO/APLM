@@ -42,8 +42,8 @@ export default function ProfileScreen() {
       <View style={styles.profileHeader}>
         <Image source={require('./user.jpg')} style={styles.profileImage} />
         <View style={styles.profileInfo}>
-          <Text style={styles.profileName}>João Costa</Text>
-          <Text style={styles.profileEmail}>joao.costa@mail.com</Text>
+          <Text style={styles.profileName}>Jonh Doe</Text>
+          <Text style={styles.profileEmail}>jonh.doe@gmail.com</Text>
         </View>
         <TouchableOpacity style={styles.editButton} onPress={handleEditProfile}>
           <MaterialIcons name="edit" size={24} color="#7AB2B2" />

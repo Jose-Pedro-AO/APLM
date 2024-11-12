@@ -24,12 +24,29 @@ interface Station {
   availableBikes: number;
 }
 
+interface Places {
+  id: string;
+  name: String;
+  location: String;
+}
+
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedStation, setSelectedStation] = useState<Station | null>(null);
-  const [currentLocation, setCurrentLocation] = useState<string>('');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filteredStations, setFilteredStations] = useState<Station[]>([]);
+  const [currentLocation, setCurrentLocation] =
+    useState<string>('Minha localização');
+
+  const places: Places[] = [
+    { id: '1', name: 'Estação Central', location: 'Rua Principal' },
+    { id: '2', name: 'Estação 1 de Maio', location: '1 de Maio' },
+    { id: '3', name: 'Estação Ingombota', location: 'Ingombota' },
+  ];
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredStations = places.filter(places =>
+    places.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const stations: Station[] = [
     { id: 1, latitude: -8.815948, longitude: 13.230298, availableBikes: 5 },
@@ -49,19 +66,19 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     setModalVisible(false);
   };
 
-  const handleInputFocus = () => {
-    navigation.navigate('Destino');
-  };
-
-  const handleSearch = (text: string) => {
-    setSearchQuery(text);
-    const results = stations.filter(
-      station =>
-        station.id.toString().includes(text) ||
-        station.availableBikes.toString().includes(text)
-    );
-    setFilteredStations(results);
-  };
+  const renderStationItem = ({ item }: { item: Station }) => (
+    <TouchableOpacity
+      style={styles.searchResult}
+      onPress={() => {
+        setSelectedStation(item);
+        setModalVisible(false);
+      }}
+    >
+      <Text>
+        Estação {item.id} - Bikes disponíveis: {item.availableBikes}
+      </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
@@ -94,7 +111,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       </MapView>
 
       <View style={styles.overlay}>
-        <Text style={styles.greeting}>Olá, João Silva</Text>
+        <Text style={styles.greeting}>Olá, Jonh Doe</Text>
         <Text style={styles.question}>Escolher estação:</Text>
         <View style={styles.inputContainer}>
           <Ionicons
@@ -106,55 +123,45 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <TextInput
             placeholder="Digite o nome da estação"
             style={styles.input}
-            // onFocus={handleInputFocus}
             onFocus={() => setModalVisible(true)}
           />
         </View>
       </View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
+      {/* Modal para busca de estações */}
+      <Modal visible={modalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>
-              Estação {selectedStation?.id || 'Selecionar Estação'}
-            </Text>
-
             <TextInput
-              value={currentLocation}
               style={styles.input}
-              editable={false}
-            />
-
-            <TextInput
-              placeholder="Pesquisar estação"
+              placeholder="Pesquisar estação de partida"
               value={searchQuery}
-              onChangeText={handleSearch}
+              onChangeText={setSearchQuery}
+            />
+            <TextInput
               style={styles.input}
+              placeholder="Pesquisar estação de chegada"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
             />
 
             <FlatList
               data={filteredStations}
-              keyExtractor={item => item.id.toString()}
+              keyExtractor={item => item.id}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handleStationPress(item)}>
-                  <Text style={styles.searchResult}>
-                    Estação {item.id} - Bicicletas: {item.availableBikes}
-                  </Text>
+                <TouchableOpacity
+                  style={styles.searchResult}
+                  onPress={() => {
+                    setModalVisible(false);
+                    console.log(`Estação selecionada: ${item.name}`);
+                  }}
+                >
+                  <Text>{item.name}</Text>
+                  <Text>{item.location}</Text>
                 </TouchableOpacity>
               )}
             />
 
-            <TouchableOpacity
-              style={styles.reserveButton}
-              onPress={handleReservation}
-            >
-              <Text style={styles.reserveButtonText}>Reservar</Text>
-            </TouchableOpacity>
             <TouchableOpacity onPress={() => setModalVisible(false)}>
               <Text style={styles.modalCloseText}>Fechar</Text>
             </TouchableOpacity>
